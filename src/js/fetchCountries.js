@@ -1,7 +1,7 @@
-const apiUrl = 'https://restcountries.com/v3.1/name/';
-const debounceSearchCountry = _.debounce(searchCountry, 300);
 import debounce from 'lodash.debounce';
-// import debounce from "./package-lock.json";
+
+const apiUrl = 'https://restcountries.com/v3.1/name/';
+const debounceSearchCountry = debounce(searchCountry, 300);
 
 function fetchCountries(country) {
   const countryInfoContainer = document.getElementById('countryInfo');
@@ -10,7 +10,9 @@ function fetchCountries(country) {
         <p>Stolica: ${country.capital[0]}</p>
         <p>Liczba populacji: ${country.population}</p>
         <p>Języki: ${
-          country.languages ? country.languages.join(', ') : 'Brak informacji'
+          Object.values(country.languages)
+            ? Object.values(country.languages).join(', ')
+            : 'Brak informacji'
         }</p>
         <img src="${country.flags.svg}" alt="Flaga kraju ${
     country.name.common
